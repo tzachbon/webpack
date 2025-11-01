@@ -425,20 +425,18 @@ describe("Cli", () => {
 	});
 
 	describe("isColorSupported", () => {
-		const OLD_ENV = process.env;
+		const OLD_ENV = { ...process.env };
 
 		beforeEach(() => {
 			// Most important - it clears the cache
 			jest.resetModules();
 			process.env = { ...OLD_ENV };
 			// Prevent `process.env.FORCE_COLOR` from being auto set by `jest-worker`
-			if (OLD_ENV.FORCE_COLOR) {
-				delete process.env.FORCE_COLOR;
-			}
+			delete process.env.FORCE_COLOR;
 			// Prevent `process.env.TERM` default value
-			if (OLD_ENV.TERM) {
-				delete process.env.TERM;
-			}
+			delete process.env.TERM;
+			// Ensure host `NO_COLOR` does not leak into tests
+			delete process.env.NO_COLOR;
 		});
 
 		afterAll(() => {

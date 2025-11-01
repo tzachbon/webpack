@@ -1,5 +1,13 @@
 "use strict";
 
+const ORIGINAL_NO_COLOR = process.env.NO_COLOR;
+if (ORIGINAL_NO_COLOR !== undefined) {
+	delete process.env.NO_COLOR;
+	process.on("exit", () => {
+		process.env.NO_COLOR = ORIGINAL_NO_COLOR;
+	});
+}
+
 expect.extend({
 	toBeTypeOf(received, expected) {
 		const objType = typeof received;

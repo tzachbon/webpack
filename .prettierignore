@@ -29,6 +29,8 @@ coverage/
 *.check.d.ts
 types.d.ts
 declarations/WebpackOptions.d.ts
+dist/
+events.json
 
 # Ignore precompiled schemas
 schemas/**/*.check.js
